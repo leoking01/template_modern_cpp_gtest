@@ -11,15 +11,19 @@ project(
 
 verbose_message("Adding tests under ${CMAKE_PROJECT_NAME}Tests...")
 
-
+if(MSVC )
 #set(GTEST_DIR_LK  "E:/aOneSynch0302_20g/template_Cmake_modern-cpp/modern-cpp-template/libVs2015X64/installGoogleTest1100Shared")
-set(GTEST_DIR_LK  "../../libVs2015X64/installGoogleTest1100Shared")
+set(GTEST_DIR_LK  "../../thirdPart/libVs2015X64/installGoogleTest1100Shared")
 set(GTest_DIR   ${GTEST_DIR_LK}/lib/cmake/GTest )
 find_package(GTest REQUIRED PATHS  ${GTEST_DIR_LK}    )
 
 #set(GTest_DIR   "E:/aOneSynch0302_20g/template_Cmake_modern-cpp/modern-cpp-template/libVs2015X64/installGoogleTest1100Shared/lib/cmake/GTest" )
 #find_package(GTest REQUIRED PATHS  "E:/aOneSynch0302_20g/template_Cmake_modern-cpp/modern-cpp-template/libVs2015X64/installGoogleTest1100Shared"    )
-
+elseif(UNIX )
+    set(GTEST_DIR_LK  "../../thirdPart/install_googletest")
+    set(GTest_DIR   ${GTEST_DIR_LK}/lib/cmake/GTest )
+    find_package(GTest REQUIRED PATHS  ${GTEST_DIR_LK}    )
+endif()
 
 #
 # Set the sources for the unit tests and add the executable(s)
@@ -61,9 +65,9 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     #    E:\aOneSynch0302_20g\template_Cmake_modern-cpp\modern-cpp-template\installGoogleTest1100Shared\lib\cmake\GTest
 #    set(GTest_DIR  "../installGoogleTest1100Shared/lib/cmake/GTest")
 #    find_package(GTest REQUIRED   PATHS "../installGoogleTest1100Shared"   )
-set(GTEST_DIR_LK  "../../libVs2015X64/installGoogleTest1100Shared")
-set(GTest_DIR   ${GTEST_DIR_LK}/lib/cmake/GTest )
-find_package(GTest REQUIRED PATHS  ${GTEST_DIR_LK}    )
+#set(GTEST_DIR_LK  "../../libVs2015X64/installGoogleTest1100Shared")
+#set(GTest_DIR   ${GTEST_DIR_LK}/lib/cmake/GTest )
+#find_package(GTest REQUIRED PATHS  ${GTEST_DIR_LK}    )
 
 
     if(${CMAKE_PROJECT_NAME}_USE_GOOGLE_MOCK)
